@@ -3352,6 +3352,42 @@
 		{
 			"Path": "$(ProjectDir)/Binaries/Win64/UnrealEditor.modules",
 			"Type": "RequiredResource"
+		},
+		{
+			"Path": "$(ProjectDir)/Plugins/ALS-Refactored-main/Binaries/Win64/UnrealEditor-ALS.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
+			"Path": "$(ProjectDir)/Plugins/ALS-Refactored-main/Binaries/Win64/UnrealEditor-ALS.pdb",
+			"Type": "SymbolFile"
+		},
+		{
+			"Path": "$(ProjectDir)/Plugins/ALS-Refactored-main/Binaries/Win64/UnrealEditor-ALSCamera.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
+			"Path": "$(ProjectDir)/Plugins/ALS-Refactored-main/Binaries/Win64/UnrealEditor-ALSCamera.pdb",
+			"Type": "SymbolFile"
+		},
+		{
+			"Path": "$(ProjectDir)/Plugins/ALS-Refactored-main/Binaries/Win64/UnrealEditor-ALSEditor.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
+			"Path": "$(ProjectDir)/Plugins/ALS-Refactored-main/Binaries/Win64/UnrealEditor-ALSEditor.pdb",
+			"Type": "SymbolFile"
+		},
+		{
+			"Path": "$(ProjectDir)/Plugins/ALS-Refactored-main/Binaries/Win64/UnrealEditor-ALSExtras.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
+			"Path": "$(ProjectDir)/Plugins/ALS-Refactored-main/Binaries/Win64/UnrealEditor-ALSExtras.pdb",
+			"Type": "SymbolFile"
+		},
+		{
+			"Path": "$(ProjectDir)/Plugins/ALS-Refactored-main/Binaries/Win64/UnrealEditor.modules",
+			"Type": "RequiredResource"
 		}
 	],
 	"RuntimeDependencies": [
@@ -24537,6 +24573,10 @@
 		},
 		{
 			"Path": "$(ProjectDir)/Ludum_2023.uproject",
+			"Type": "UFS"
+		},
+		{
+			"Path": "$(ProjectDir)/Plugins/ALS-Refactored-main/ALS.uplugin",
 			"Type": "UFS"
 		}
 	],

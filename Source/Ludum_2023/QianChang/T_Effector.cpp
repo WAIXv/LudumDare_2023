@@ -273,7 +273,7 @@ void AT_Effector::TransformScale(AActor* ArrayElement, int32 ArrayIndex)
 	{
 		float Distance = UKismetMathLibrary::Vector_Distance(GetActorLocation(), DefaultLocation[ArrayIndex]);
 		float Clamp = UKismetMathLibrary::FClamp(Distance, DistanceMin, DistanceMax);
-		float InvertOffset = UKismetMathLibrary::MapRangeClamped(Clamp, DistanceMin, DistanceMax, MinScale, MaxScale);
+		float InvertOffset = UKismetMathLibrary::MapRangeClamped(Clamp, DistanceMin, DistanceMax, MaxScale, MinScale);
 		FVector InvertVectorOffset{ InvertOffset,InvertOffset,InvertOffset };
 		FVector InvertVector = UKismetMathLibrary::Multiply_VectorVector(DefaultRelativeScale[ArrayIndex], InvertVectorOffset);
 		ArrayElement->GetRootComponent()->SetRelativeScale3D(InvertVector);

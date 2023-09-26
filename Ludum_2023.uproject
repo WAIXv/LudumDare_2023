@@ -1,0 +1,22 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{449B3F2B-4D1F-2DBB-FB45-0CA7BC0677EA}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "Ludum_2023",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "ModelingToolsEditorMode",
+			"Enabled": true,
+			"TargetAllowList": [
+				"Editor"
+			]
+		}
+	]
+}

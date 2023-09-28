@@ -8,6 +8,24 @@ public class Ludum_2023 : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay", "EnhancedInput" ,"AIModule", "GameplayTasks"});
+		PublicDependencyModuleNames.AddRange(new string[] 
+			{ 
+				"Core",
+				"CoreUObject", 
+				"Engine", 
+				"InputCore", 
+				"HeadMountedDisplay", 
+				"EnhancedInput" ,
+				"AIModule", 
+				"GameplayTasks",
+				"ALS",
+			}
+		);
+		
+		PrivateDependencyModuleNames.AddRange( new string[]
+			{
+				"ALS",
+			}
+		);
 	}
 }

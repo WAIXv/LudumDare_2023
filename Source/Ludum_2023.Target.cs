@@ -16,6 +16,6 @@ public class Ludum_2023Target : TargetRules
 
 	private void RegisterModulesCreatedByRider()
 	{
-		ExtraModuleNames.AddRange(new string[] { "ALS_Extension" });
+		ExtraModuleNames.AddRange(new string[] {  });
 	}
 }

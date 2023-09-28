@@ -119,4 +119,7 @@ private:
 
 public:
 	virtual void DisplayDebug(UCanvas* Canvas, const FDebugDisplayInfo& DisplayInfo, float& Unused, float& VerticalLocation) override;
+public:
+	UPROPERTY(EditAnywhere,Category = "3DGame")
+	bool b3DGameMode = false;
 };

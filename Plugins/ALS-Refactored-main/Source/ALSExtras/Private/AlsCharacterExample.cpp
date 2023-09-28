@@ -81,9 +81,14 @@ void AAlsCharacterExample::SetupPlayerInputComponent(UInputComponent* Input)
 void AAlsCharacterExample::Input_OnLookMouse(const FInputActionValue& ActionValue)
 {
 	const auto Value{ActionValue.Get<FVector2D>()};
-
-	AddControllerPitchInput(Value.Y * LookUpMouseSensitivity);
-	AddControllerYawInput(Value.X * LookRightMouseSensitivity);
+	if (b3DGameMode) {
+		AddControllerPitchInput(Value.Y * LookUpMouseSensitivity);
+		AddControllerYawInput(Value.X * LookRightMouseSensitivity);
+	}
+	else
+	{
+		AddControllerYawInput(Value.X * LookRightMouseSensitivity * 0.4f);
+	}
 }
 
 void AAlsCharacterExample::Input_OnLook(const FInputActionValue& ActionValue)

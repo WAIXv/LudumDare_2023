@@ -205,7 +205,7 @@ void UAlsCameraComponent::TickCamera(const float DeltaTime, bool bAllowLag)
 		CameraFov = Settings->FirstPerson.Fov;
 		return;
 	}
-
+	
 	// Force disable camera lag if the character was teleported.
 
 	bAllowLag &= Settings->TeleportDistanceThreshold <= 0.0f ||

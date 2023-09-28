@@ -13,7 +13,7 @@ UCLASS(HideCategories = ("ComponentTick", "Clothing", "Physics", "MasterPoseComp
 class ALSCAMERA_API UAlsCameraComponent : public USkeletalMeshComponent
 {
 	GENERATED_BODY()
-
+	
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Settings")
 	TObjectPtr<UAlsCameraSettings> Settings;

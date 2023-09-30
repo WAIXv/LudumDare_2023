@@ -50,7 +50,7 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Settings|Als Character|Desired State",
 		ReplicatedUsing = "OnReplicated_OverlayMode")
-	FGameplayTag OverlayMode{AlsOverlayModeTags::Default};
+	FGameplayTag OverlayMode{AlsOverlayModeTags::M4};
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "State|Als Character", Transient, Meta = (ShowInnerProperties))
 	TWeakObjectPtr<UAlsAnimationInstance> AnimationInstance;
@@ -59,7 +59,7 @@ protected:
 	FGameplayTag LocomotionMode{AlsLocomotionModeTags::Grounded};
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "State|Als Character", Transient)
-	FGameplayTag RotationMode{AlsRotationModeTags::ViewDirection};
+	FGameplayTag RotationMode{AlsRotationModeTags::Aiming};
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "State|Als Character", Transient)
 	FGameplayTag Stance{AlsStanceTags::Standing};

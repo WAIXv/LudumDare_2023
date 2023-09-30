@@ -1,5 +1,4 @@
 #include "AlsCameraComponent.h"
-
 #include "AlsCameraSettings.h"
 #include "DrawDebugHelpers.h"
 #include "Animation/AnimInstance.h"
@@ -182,8 +181,10 @@ void UAlsCameraComponent::TickCamera(const float DeltaTime, bool bAllowLag)
 			CameraMovementBaseRelativeRotation = FQuat::Identity;
 		}
 	}
-
-	const auto CameraTargetRotation{Character->GetViewRotation()};
+	
+	const auto ControlRotation = b3DGameMode ? Character->GetViewRotation() : FRotator{ 0.f,0.f,0.f };
+	
+	const auto CameraTargetRotation = b3DGameMode ? ControlRotation : FRotator{ControlRotation.Quaternion() * FRotator { -90.f,0.f,0.f }.Quaternion()} ;
 
 	const auto PreviousPivotTargetLocation{PivotTargetLocation};
 

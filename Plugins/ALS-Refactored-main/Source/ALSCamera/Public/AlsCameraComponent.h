@@ -21,6 +21,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Settings", Meta = (ClampMin = 0, ClampMax = 1))
 	float PostProcessWeight;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Settings")
+	bool b3DGameMode;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "State", Transient)
 	TObjectPtr<ACharacter> Character;
 

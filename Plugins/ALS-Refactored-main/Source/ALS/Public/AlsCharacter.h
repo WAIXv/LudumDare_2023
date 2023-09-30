@@ -37,7 +37,7 @@ protected:
 	bool bDesiredAiming;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Settings|Als Character|Desired State", Replicated)
-	FGameplayTag DesiredRotationMode{AlsRotationModeTags::ViewDirection};
+	FGameplayTag DesiredRotationMode{AlsRotationModeTags::VelocityDirection};
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Settings|Als Character|Desired State", Replicated)
 	FGameplayTag DesiredStance{AlsStanceTags::Standing};

@@ -18,13 +18,15 @@ public class Ludum_2023 : ModuleRules
 				"EnhancedInput" ,
 				"AIModule", 
 				"GameplayTasks",
-				"ALS",
+
 			}
 		);
 		
 		PrivateDependencyModuleNames.AddRange( new string[]
 			{
 				"ALS",
+				"ALSCamera",
+				"GameplayAbilities",
 			}
 		);
 	}

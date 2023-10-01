@@ -1,5 +1,7 @@
 #include "AlsCharacterExample.h"
 
+#include <stdexcept>
+
 #include "AlsCameraComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
@@ -62,142 +64,26 @@ void AAlsCharacterExample::SetupPlayerInputComponent(UInputComponent* Input)
 	auto* EnhancedInput{Cast<UEnhancedInputComponent>(Input)};
 	if (IsValid(EnhancedInput))
 	{
-		EnhancedInput->BindAction(LookMouseAction, ETriggerEvent::Triggered, this, &ThisClass::Input_OnLookMouse);
-		EnhancedInput->BindAction(LookAction, ETriggerEvent::Triggered, this, &ThisClass::Input_OnLook);
 		EnhancedInput->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ThisClass::Input_OnMove);
-		//EnhancedInput->BindAction(SprintAction, ETriggerEvent::Triggered, this, &ThisClass::Input_OnSprint);
-		EnhancedInput->BindAction(WalkAction, ETriggerEvent::Triggered, this, &ThisClass::Input_OnWalk);
-		EnhancedInput->BindAction(CrouchAction, ETriggerEvent::Triggered, this, &ThisClass::Input_OnCrouch);
-		//EnhancedInput->BindAction(JumpAction, ETriggerEvent::Triggered, this, &ThisClass::Input_OnJump);
-		EnhancedInput->BindAction(AimAction, ETriggerEvent::Triggered, this, &ThisClass::Input_OnAim);
-		//EnhancedInput->BindAction(RagdollAction, ETriggerEvent::Triggered, this, &ThisClass::Input_OnRagdoll);
-		EnhancedInput->BindAction(RollAction, ETriggerEvent::Triggered, this, &ThisClass::Input_OnRoll);
-		//EnhancedInput->BindAction(RotationModeAction, ETriggerEvent::Triggered, this, &ThisClass::Input_OnRotationMode);
-		//EnhancedInput->BindAction(ViewModeAction, ETriggerEvent::Triggered, this, &ThisClass::Input_OnViewMode);
-		//EnhancedInput->BindAction(SwitchShoulderAction, ETriggerEvent::Triggered, this, &ThisClass::Input_OnSwitchShoulder);
+		EnhancedInput->BindAction(FireAction, ETriggerEvent::Triggered, this, &ThisClass::Input_OnFire);
 	}
 }
 
-void AAlsCharacterExample::Input_OnLookMouse(const FInputActionValue& ActionValue)
+void AAlsCharacterExample::Input_OnFire()
 {
-	const auto Value{ActionValue.Get<FVector2D>()};	
+	UE_LOG(LogTemp,Log,TEXT("Input_OnFire()"));
 
-		AddControllerPitchInput(Value.Y * LookUpMouseSensitivity);
-		AddControllerYawInput(Value.X * LookRightMouseSensitivity);
-
-}
-
-void AAlsCharacterExample::Input_OnLook(const FInputActionValue& ActionValue)
-{
-	const auto Value{ActionValue.Get<FVector2D>()};
-
-	AddControllerPitchInput(Value.Y * LookUpRate);
-	AddControllerYawInput(Value.X * LookRightRate);
+	OnFireEvent.Broadcast();
 }
 
 void AAlsCharacterExample::Input_OnMove(const FInputActionValue& ActionValue)
 {
 	const auto Value{UAlsMath::ClampMagnitude012D(ActionValue.Get<FVector2D>())};
 
-	const auto ForwardDirection{UAlsMath::AngleToDirectionXY(UE_REAL_TO_FLOAT(GetViewState().Rotation.Yaw))};
-	const auto RightDirection{UAlsMath::PerpendicularCounterClockwiseXY(ForwardDirection)};
+	const auto ForwardDirection{FVector::ForwardVector};
+	const auto RightDirection{FVector::RightVector};
 
 	AddMovementInput(ForwardDirection * Value.Y + RightDirection * Value.X);
-}
-
-void AAlsCharacterExample::Input_OnSprint(const FInputActionValue& ActionValue)
-{
-	SetDesiredGait(ActionValue.Get<bool>() ? AlsGaitTags::Sprinting : AlsGaitTags::Running);
-}
-
-void AAlsCharacterExample::Input_OnWalk()
-{
-	if (GetDesiredGait() == AlsGaitTags::Walking)
-	{
-		SetDesiredGait(AlsGaitTags::Running);
-	}
-	else if (GetDesiredGait() == AlsGaitTags::Running)
-	{
-		SetDesiredGait(AlsGaitTags::Walking);
-	}
-}
-
-void AAlsCharacterExample::Input_OnCrouch()
-{
-	if (GetDesiredStance() == AlsStanceTags::Standing)
-	{
-		SetDesiredStance(AlsStanceTags::Crouching);
-	}
-	else if (GetDesiredStance() == AlsStanceTags::Crouching)
-	{
-		SetDesiredStance(AlsStanceTags::Standing);
-	}
-}
-
-void AAlsCharacterExample::Input_OnJump(const FInputActionValue& ActionValue)
-{
-	if (ActionValue.Get<bool>())
-	{
-		if (TryStopRagdolling())
-		{
-			return;
-		}
-
-		if (TryStartMantlingGrounded())
-		{
-			return;
-		}
-
-		if (GetStance() == AlsStanceTags::Crouching)
-		{
-			SetDesiredStance(AlsStanceTags::Standing);
-			return;
-		}
-
-		Jump();
-	}
-	else
-	{
-		StopJumping();
-	}
-}
-
-void AAlsCharacterExample::Input_OnAim(const FInputActionValue& ActionValue)
-{
-	SetDesiredAiming(ActionValue.Get<bool>());
-}
-
-void AAlsCharacterExample::Input_OnRagdoll()
-{
-	if (!TryStopRagdolling())
-	{
-		StartRagdolling();
-	}
-}
-
-void AAlsCharacterExample::Input_OnRoll()
-{
-	static constexpr auto PlayRate{1.3f};
-
-	TryStartRolling(PlayRate);
-}
-
-void AAlsCharacterExample::Input_OnRotationMode()
-{
-	SetDesiredRotationMode(GetDesiredRotationMode() == AlsRotationModeTags::VelocityDirection
-		                       ? AlsRotationModeTags::ViewDirection
-		                       : AlsRotationModeTags::VelocityDirection);
-}
-
-void AAlsCharacterExample::Input_OnViewMode()
-{
-	SetViewMode(GetViewMode() == AlsViewModeTags::ThirdPerson ? AlsViewModeTags::FirstPerson : AlsViewModeTags::ThirdPerson);
-}
-
-// ReSharper disable once CppMemberFunctionMayBeConst
-void AAlsCharacterExample::Input_OnSwitchShoulder()
-{
-	Camera->SetRightShoulder(!Camera->IsRightShoulder());
 }
 
 void AAlsCharacterExample::DisplayDebug(UCanvas* Canvas, const FDebugDisplayInfo& DisplayInfo, float& Unused, float& VerticalLocation)

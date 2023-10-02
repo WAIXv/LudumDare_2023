@@ -9,7 +9,7 @@
 
 ULudumHealthComponent::ULudumHealthComponent()
 {
-	Health = 100;
+	// Health = 100;
 }
 
 bool ULudumHealthComponent::IsAlive() const

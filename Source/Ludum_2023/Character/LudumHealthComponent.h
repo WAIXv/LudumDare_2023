@@ -32,6 +32,9 @@ public:
 	FOnHealthChanged OnHealthChanged;
 
 	UFUNCTION(BlueprintCallable, Category = "Attributes")
-	bool ApplyHealthChange(float Delta);
+	bool ApplyHealthChange(AActor* OtherActor,float Delta);
+
+	UFUNCTION(BlueprintCallable, Category = "Attributes")
+	float GetHealth() { return Health; }
 
 };

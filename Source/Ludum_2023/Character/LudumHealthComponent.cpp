@@ -17,12 +17,12 @@ bool ULudumHealthComponent::IsAlive() const
 	return Health > 0.0f;
 }
 
-bool ULudumHealthComponent::ApplyHealthChange(float Delta)
+bool ULudumHealthComponent::ApplyHealthChange(AActor* OtherActor,float Delta)
 {
 	UE_LOG(LogTemp, Log, TEXT("ApplyHealthChange:%d"),Delta)
 	Health += Delta;
 
-	OnHealthChanged.Broadcast(nullptr, this, Health, Delta);
+	OnHealthChanged.Broadcast(OtherActor, this, Health, Delta);
 
 	return true;
 }

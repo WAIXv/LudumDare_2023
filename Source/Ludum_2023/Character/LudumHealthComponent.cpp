@@ -19,10 +19,15 @@ bool ULudumHealthComponent::IsAlive() const
 
 bool ULudumHealthComponent::ApplyHealthChange(AActor* OtherActor,float Delta)
 {
-	UE_LOG(LogTemp, Log, TEXT("ApplyHealthChange:%d"),Delta)
 	Health += Delta;
+	if(Health <= 0)
+	{
+		Health = 0;
+		OnDeadEvent.Broadcast();
+		OnHealthChanged.Broadcast(OtherActor, this, Health, Delta);
+		return false;
+	}
 
 	OnHealthChanged.Broadcast(OtherActor, this, Health, Delta);
-
 	return true;
 }
